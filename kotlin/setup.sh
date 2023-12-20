@@ -1,6 +1,7 @@
 #!/bin/bash
 source ~/.bash_profile
 #running postgres
+docker pull postgres:16-alpine3.17
 docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=pass123 postgres:16.1-alpine
 #cleaning the build folder
 rm -r build

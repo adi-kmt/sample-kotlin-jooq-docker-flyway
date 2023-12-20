@@ -10,9 +10,9 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.4"
 	kotlin("jvm") version "1.9.20"
 	kotlin("plugin.spring") version "1.9.20"
-	id("com.google.cloud.tools.jib") version "3.4.0"
+	id("com.google.cloud.tools.jib") version "3.4.0" // not used.
 	id("org.flywaydb.flyway") version "9.22.1" // Major version 10 has some issues with postgres migration
-	id("nu.studer.jooq") version "8.2"
+	id("nu.studer.jooq") version "8.2" // for jooq generation
 }
 
 group = "com.example"
@@ -41,7 +41,7 @@ dependencies {
 	implementation("io.r2dbc:r2dbc-spi:1.0.0.RELEASE")
 	implementation("org.postgresql:r2dbc-postgresql:1.0.2.RELEASE")
 
-	//normal database-for flyway migration and jooq stub generation
+	//database-for flyway migration and jooq stub generation
 	implementation("org.postgresql:postgresql:42.7.1")
 
 	//kotlin
