@@ -9,9 +9,10 @@ spring:
       enabled: true
       initial-size: 10
       max-size: 20
-      acquire-timeout: 30s
+      maxAcquireTime: 30s
       idle-timeout: 10m
       max-life-time: 30m
+
   flyway:
       baseline-on-migration: true
       url: jdbc:postgresql://postgres:5432/postgres

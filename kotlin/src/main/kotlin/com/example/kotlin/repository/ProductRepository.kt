@@ -27,13 +27,16 @@ class ProductRepository(
         .map { Product(it.id, it.name) }
 
     suspend fun save(product: Product): UUID = withContext(Dispatchers.IO) {
+        println("********* reached********")
          jooq
             .insertInto(PRODUCT)
             .columns(PRODUCT.ID, PRODUCT.NAME)
             .values(product.id, product.name)
             .returning(PRODUCT.ID)
             .awaitFirst()
-            .id
+            .id.also {
+                println("********* completed********")
+             }
     }
 
     @Cacheable("yourCacheName", key = "#id")
