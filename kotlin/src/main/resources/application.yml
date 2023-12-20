@@ -1,0 +1,21 @@
+spring:
+  jooq:
+    sql-dialect: postgres
+  r2dbc:
+    url: r2dbc:postgresql://postgres:5432/postgres
+    username: postgres
+    password: pass123
+    pool:
+      enabled: true
+      initial-size: 10
+      max-size: 20
+      acquire-timeout: 30s
+      idle-timeout: 10m
+      max-life-time: 30m
+  flyway:
+      baseline-on-migration: true
+      url: jdbc:postgresql://postgres:5432/postgres
+      location: classpath:db/migration
+      user: postgres
+      password: pass123
+
