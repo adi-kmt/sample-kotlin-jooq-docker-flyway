@@ -31,9 +31,8 @@ class R2DBCConfiguration(
     @Bean
     fun databaseClient(
         connectionFactory: ConnectionFactory
-    ): DatabaseClient {
-        return DatabaseClient.create(connectionFactory)
-    }
+    ): DatabaseClient = DatabaseClient.create(connectionFactory)
+
 
     @Bean
     fun connectionFactory(properties: R2dbcProperties): ConnectionFactory {
