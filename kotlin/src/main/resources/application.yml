@@ -7,7 +7,7 @@ spring:
     password: pass123
     pool:
       enabled: true
-      initial-size: 10
+      initial-size: 20
       max-size: 20
       maxAcquireTime: 30s
       idle-timeout: 10m

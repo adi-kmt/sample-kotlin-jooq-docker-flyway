@@ -3,7 +3,6 @@ package com.example.kotlin.repository
 import com.example.generated.Tables.PRODUCT
 
 import com.example.kotlin.model.Product
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

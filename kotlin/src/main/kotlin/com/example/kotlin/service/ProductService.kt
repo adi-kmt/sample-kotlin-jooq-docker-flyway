@@ -6,17 +6,19 @@ import kotlinx.coroutines.flow.toList
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import org.springframework.transaction.reactive.TransactionalOperator
 import java.util.*
 
 @Service
 @Transactional
 class ProductService(
     private val repository: ProductRepository
-) {
+    ) {
 
     suspend fun findAll(): List<Product> = repository
         .findAll()
         .toList()
+
 
     suspend fun save(product: Product): UUID {
         return repository

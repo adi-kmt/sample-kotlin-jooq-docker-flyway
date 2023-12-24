@@ -8,7 +8,9 @@ import io.r2dbc.spi.ConnectionFactory
 import org.springframework.boot.autoconfigure.r2dbc.R2dbcProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.r2dbc.connection.R2dbcTransactionManager
 import org.springframework.r2dbc.core.DatabaseClient
+import org.springframework.transaction.ReactiveTransactionManager
 
 @Configuration
 class R2DBCConfiguration(
@@ -46,5 +48,10 @@ class R2DBCConfiguration(
             .build()
 
         return PostgresqlConnectionFactory(connectionConfiguration)
+    }
+
+    @Bean
+    fun transactionManager(connectionFactory: ConnectionFactory): ReactiveTransactionManager {
+        return R2dbcTransactionManager(connectionFactory)
     }
 }
