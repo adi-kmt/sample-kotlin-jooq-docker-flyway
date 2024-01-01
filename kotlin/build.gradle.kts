@@ -31,14 +31,15 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.springframework.boot:spring-boot-starter-jooq:3.2.0")
+	implementation("org.springframework.boot:spring-boot-starter-jooq:3.2.1")
 	implementation ("org.springframework.boot:spring-boot-starter-cache")
 
 
 
 	//reactive database
-	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc:3.2.0")
+	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc:3.2.1")
 	implementation("io.r2dbc:r2dbc-spi:1.0.0.RELEASE")
+	implementation("io.r2dbc:r2dbc-pool:1.0.1.RELEASE")
 	implementation("org.postgresql:r2dbc-postgresql:1.0.2.RELEASE")
 
 	//database-for flyway migration and jooq stub generation

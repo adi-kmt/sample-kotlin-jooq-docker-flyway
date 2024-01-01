@@ -1,16 +1,21 @@
 package com.example.kotlin.config
 
-import io.r2dbc.pool.ConnectionPool
-import io.r2dbc.pool.ConnectionPoolConfiguration
-import io.r2dbc.postgresql.PostgresqlConnectionConfiguration
-import io.r2dbc.postgresql.PostgresqlConnectionFactory
+import io.r2dbc.pool.PoolingConnectionFactoryProvider.*
+import io.r2dbc.postgresql.PostgresqlConnectionFactoryProvider.*
+import io.r2dbc.spi.ConnectionFactories
 import io.r2dbc.spi.ConnectionFactory
+import io.r2dbc.spi.ConnectionFactoryOptions
+import io.r2dbc.spi.ConnectionFactoryOptions.*
 import org.springframework.boot.autoconfigure.r2dbc.R2dbcProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Primary
 import org.springframework.r2dbc.connection.R2dbcTransactionManager
 import org.springframework.r2dbc.core.DatabaseClient
 import org.springframework.transaction.ReactiveTransactionManager
+import org.springframework.transaction.annotation.EnableTransactionManagement
+import java.time.Duration
+
 
 @Configuration
 class R2DBCConfiguration(
@@ -18,36 +23,31 @@ class R2DBCConfiguration(
 ) {
 
     @Bean
-    fun connectionPool(
-        connectionFactory: ConnectionFactory,
-    ): ConnectionPool {
-        val poolConfig = ConnectionPoolConfiguration.builder(connectionFactory)
-            .maxIdleTime(properties.pool.maxIdleTime )
-            .maxSize(properties.pool.maxSize)
-            .initialSize(properties.pool.initialSize)
-            .build()
-
-        return ConnectionPool(poolConfig)
-    }
-
-    @Bean
     fun databaseClient(
         connectionFactory: ConnectionFactory
-    ): DatabaseClient = DatabaseClient.create(connectionFactory)
-
-
+    ): DatabaseClient = DatabaseClient.builder()
+        .connectionFactory(connectionFactory)
+        .build()
     @Bean
+    @Primary
     fun connectionFactory(properties: R2dbcProperties): ConnectionFactory {
-        val connectionConfiguration = PostgresqlConnectionConfiguration
-            .builder()
-            .host("postgres")
-            .port(5432) // Your database port
-            .database(properties.name)
-            .username(properties.username)
-            .password(properties.password)
-            .build()
-
-        return PostgresqlConnectionFactory(connectionConfiguration)
+        val options: MutableMap<String, String> = HashMap()
+        return ConnectionFactories.get(
+            ConnectionFactoryOptions.builder()
+                .option(PROTOCOL, "postgresql")
+                .option<String>(DRIVER, "pool")
+                .option<String>(HOST, "postgres")
+                .option<Int>(PORT, 5432)
+                .option<String>(USER, "postgres")
+                .option(PASSWORD, "pass123")
+                .option<String>(DATABASE, "postgres")
+                .option(MAX_SIZE, 20)
+                .option(INITIAL_SIZE, 20)
+                .option(SCHEMA, "public")
+                .option(MAX_ACQUIRE_TIME, Duration.ofSeconds(30))
+                .option(MAX_IDLE_TIME, Duration.ofSeconds(30))
+                .build()
+        )
     }
 
     @Bean

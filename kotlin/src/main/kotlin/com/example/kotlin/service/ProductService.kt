@@ -5,12 +5,12 @@ import com.example.kotlin.repository.ProductRepository
 import kotlinx.coroutines.flow.toList
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.transaction.reactive.TransactionalOperator
 import java.util.*
 
 @Service
-@Transactional
 class ProductService(
     private val repository: ProductRepository
     ) {

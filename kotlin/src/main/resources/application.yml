@@ -1,3 +1,6 @@
+logging:
+  level:
+    r2dbc: DEBUG
 spring:
   jooq:
     sql-dialect: postgres
@@ -10,11 +13,11 @@ spring:
       initial-size: 20
       max-size: 20
       maxAcquireTime: 30s
-      idle-timeout: 10m
+      idle-timeout: 10s
       max-life-time: 30m
 
   flyway:
-      baseline-on-migration: true
+      baseline-on-migration: false
       url: jdbc:postgresql://postgres:5432/postgres
       location: classpath:db/migration
       user: postgres
