@@ -1,6 +1,5 @@
-FROM eclipse-temurin:19
+FROM openjdk:17-alpine
 
-# Set the working directory to /app
 WORKDIR /app
 
 COPY build/libs/kotlin-*-SNAPSHOT.jar /service.jar
@@ -10,4 +9,3 @@ EXPOSE 8080
 
 # Command to run your application
 CMD ["java", "-jar", "/service.jar"]
-

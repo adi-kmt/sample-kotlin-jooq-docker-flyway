@@ -18,18 +18,22 @@ public class Product implements Serializable {
 
     private final UUID id;
     private final String name;
+    private final Integer price;
 
     public Product(Product value) {
         this.id = value.id;
         this.name = value.name;
+        this.price = value.price;
     }
 
     public Product(
         UUID id,
-        String name
+        String name,
+        Integer price
     ) {
         this.id = id;
         this.name = name;
+        this.price = price;
     }
 
     /**
@@ -44,6 +48,13 @@ public class Product implements Serializable {
      */
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Getter for <code>public.product.price</code>.
+     */
+    public Integer getPrice() {
+        return this.price;
     }
 
     @Override
@@ -67,6 +78,12 @@ public class Product implements Serializable {
         }
         else if (!this.name.equals(other.name))
             return false;
+        if (this.price == null) {
+            if (other.price != null)
+                return false;
+        }
+        else if (!this.price.equals(other.price))
+            return false;
         return true;
     }
 
@@ -76,6 +93,7 @@ public class Product implements Serializable {
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
+        result = prime * result + ((this.price == null) ? 0 : this.price.hashCode());
         return result;
     }
 
@@ -85,6 +103,7 @@ public class Product implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(name);
+        sb.append(", ").append(price);
 
         sb.append(")");
         return sb.toString();

@@ -1,5 +1,6 @@
 CREATE TABLE PRODUCT
 (
 id UUID PRIMARY KEY,
-name TEXT
+name TEXT,
+price INTEGER
 );

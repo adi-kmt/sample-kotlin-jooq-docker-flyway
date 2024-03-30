@@ -13,4 +13,4 @@ rm -r build
  #kill all docker process
 docker kill $(docker ps -q)
 #build multi-container application
-docker-compose up --build
+docker compose up --build
